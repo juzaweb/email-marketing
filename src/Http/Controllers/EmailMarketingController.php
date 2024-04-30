@@ -9,12 +9,5 @@ class EmailMarketingController extends BackendController
     public function index()
     {
         //
-
-        return view(
-            'jem::index',
-            [
-                'title' => 'Title Page',
-            ]
-        );
     }
 }
