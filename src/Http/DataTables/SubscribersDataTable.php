@@ -26,7 +26,7 @@ class SubscribersDataTable extends DataTable
 			Column::id(),
 			Column::actions(),
 			Column::make('email'),
-			Column::editLink('name', admin_url('subscribers/{id}/edit'), __('admin::translation.label')),
+			Column::editLink('name', admin_url('subscribers/{id}/edit'), __('core::translation.label')),
 			Column::make('status'),
 			Column::createdAt()
 		];

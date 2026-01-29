@@ -25,7 +25,7 @@ class EmailTemplatesDataTable extends DataTable
 			Column::checkbox(),
 			Column::id(),
 			Column::actions(),
-			Column::editLink('name', admin_url('email-templates/{id}/edit'), __('admin::translation.label')),
+			Column::editLink('name', admin_url('email-templates/{id}/edit'), __('core::translation.label')),
 			Column::createdAt()
 		];
     }

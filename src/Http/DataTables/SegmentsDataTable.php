@@ -25,7 +25,7 @@ class SegmentsDataTable extends DataTable
             Column::checkbox(),
             Column::id(),
             Column::actions(),
-            Column::editLink('name', admin_url('email-marketing/segments/{id}/edit'), __('admin::translation.label')),
+            Column::editLink('name', admin_url('email-marketing/segments/{id}/edit'), __('core::translation.label')),
             Column::createdAt()
         ];
     }

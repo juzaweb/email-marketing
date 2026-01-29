@@ -25,7 +25,7 @@ class CampaignsDataTable extends DataTable
             Column::checkbox(),
             Column::id(),
             Column::actions(),
-            Column::editLink('name', admin_url('email-marketing/campaigns/{id}/edit'), __('admin::translation.label')),
+            Column::editLink('name', admin_url('email-marketing/campaigns/{id}/edit'), __('core::translation.label')),
             Column::make('subject'),
             Column::make('template_id'),
             Column::make('status'),
