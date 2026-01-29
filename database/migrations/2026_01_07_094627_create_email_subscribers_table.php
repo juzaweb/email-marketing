@@ -21,7 +21,7 @@ return new class extends Migration
             $table->enum('status', ['subscribed', 'unsubscribed', 'bounced'])->default('subscribed')->index();
             $table->datetimes();
 
-            $table->unique(['email', 'website_id']);
+            $table->unique(['email']);
         });
     }
 
