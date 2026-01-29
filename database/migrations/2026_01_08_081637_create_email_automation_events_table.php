@@ -19,7 +19,6 @@ return new class extends Migration
             $table->uuidMorphs('object_id');
             $table->dateTime('occurred_at');
             $table->json('payload')->nullable();
-            $table->websiteId();
             $table->datetimes();
         });
     }

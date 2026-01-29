@@ -15,15 +15,14 @@ return new class extends Migration
      */
     public function up()
     {
-        if (Schema::connection($this->connection)->hasTable('email_marketing_templates')) {
+        if (Schema::hasTable('email_marketing_templates')) {
             return;
         }
 
-        Schema::connection($this->connection)->create('email_marketing_templates', function (Blueprint $table) {
+        Schema::create('email_marketing_templates', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
             $table->longText('content'); // HTML content
-            $table->websiteId();
             $table->datetimes();
         });
     }
@@ -35,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::connection($this->connection)->dropIfExists('email_marketing_templates');
+        Schema::dropIfExists('email_marketing_templates');
     }
 };

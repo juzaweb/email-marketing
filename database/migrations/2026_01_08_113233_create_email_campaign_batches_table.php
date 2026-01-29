@@ -15,11 +15,11 @@ return new class extends Migration
      */
     public function up()
     {
-        if (Schema::connection($this->connection)->hasTable('email_campaign_batches')) {
+        if (Schema::hasTable('email_campaign_batches')) {
             return;
         }
 
-        Schema::connection($this->connection)->create('email_campaign_batches', function (Blueprint $table) {
+        Schema::create('email_campaign_batches', function (Blueprint $table) {
             $table->id();
             $table->foreignUuid('campaign_id')->constrained('email_campaigns')->onDelete('cascade');
             $table->string('batch_id')->unique()->comment('Laravel batch ID from Bus facade');
@@ -47,6 +47,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::connection($this->connection)->dropIfExists('email_campaign_batches');
+        Schema::dropIfExists('email_campaign_batches');
     }
 };

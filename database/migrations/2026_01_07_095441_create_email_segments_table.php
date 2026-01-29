@@ -15,19 +15,14 @@ return new class extends Migration
      */
     public function up()
     {
-        if (Schema::connection($this->connection)->hasTable('email_segments')) {
-            return;
-        }
-
-        Schema::connection($this->connection)->create('email_segments', function (Blueprint $table) {
+        Schema::create('email_segments', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
             $table->string('description')->nullable();
-            $table->websiteId();
             $table->datetimes();
         });
 
-        Schema::connection($this->connection)->create('email_segment_subscriber', function (Blueprint $table) {
+        Schema::create('email_segment_subscriber', function (Blueprint $table) {
             $table->foreignUuid('segment_id')->constrained('email_segments')->onDelete('cascade');
             $table->foreignUuid('subscriber_id')->constrained('email_subscribers')->onDelete('cascade');
             $table->primary(['segment_id', 'subscriber_id']);
@@ -41,7 +36,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::connection($this->connection)->dropIfExists('email_segment_subscriber');
-        Schema::connection($this->connection)->dropIfExists('email_segments');
+        Schema::dropIfExists('email_segment_subscriber');
+        Schema::dropIfExists('email_segments');
     }
 };

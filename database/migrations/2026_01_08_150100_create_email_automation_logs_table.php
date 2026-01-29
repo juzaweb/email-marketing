@@ -15,11 +15,11 @@ return new class extends Migration
      */
     public function up()
     {
-        if (Schema::connection($this->connection)->hasTable('email_automation_logs')) {
+        if (Schema::hasTable('email_automation_logs')) {
             return;
         }
 
-        Schema::connection($this->connection)->create('email_automation_logs', function (Blueprint $table) {
+        Schema::create('email_automation_logs', function (Blueprint $table) {
             $table->id();
             $table->foreignUuid('automation_rule_id')->constrained('email_automation_rules')->onDelete('cascade');
             $table->unsignedBigInteger('user_id'); // User or Member ID
@@ -28,7 +28,6 @@ return new class extends Migration
             $table->text('error_message')->nullable();
             $table->dateTime('scheduled_at')->nullable(); // When to send
             $table->dateTime('sent_at')->nullable(); // When actually sent
-            $table->websiteId();
             $table->datetimes();
 
             $table->index(['automation_rule_id', 'user_id', 'user_type']);
@@ -44,6 +43,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::connection($this->connection)->dropIfExists('email_automation_logs');
+        Schema::dropIfExists('email_automation_logs');
     }
 };

@@ -15,11 +15,11 @@ return new class extends Migration
      */
     public function up()
     {
-        if (Schema::connection($this->connection)->hasTable('email_campaigns')) {
+        if (Schema::hasTable('email_campaigns')) {
             return;
         }
 
-        Schema::connection($this->connection)->create('email_campaigns', function (Blueprint $table) {
+        Schema::create('email_campaigns', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('template_id')->nullable()->constrained('email_marketing_templates')->onDelete('set null');
             $table->string('name');
@@ -33,7 +33,7 @@ return new class extends Migration
             $table->datetimes();
         });
 
-        Schema::connection($this->connection)->create('email_segment_campaign', function (Blueprint $table) {
+        Schema::create('email_segment_campaign', function (Blueprint $table) {
             $table->foreignUuid('segment_id')->constrained('email_segments')->onDelete('cascade');
             $table->foreignUuid('campaign_id')->constrained('email_campaigns')->onDelete('cascade');
             $table->primary(['segment_id', 'campaign_id']);
@@ -47,6 +47,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::connection($this->connection)->dropIfExists('email_campaigns');
+        Schema::dropIfExists('email_campaigns');
     }
 };
