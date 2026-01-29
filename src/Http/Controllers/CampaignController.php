@@ -32,7 +32,7 @@ class CampaignController extends AdminController
         Breadcrumb::add(__('Create Campaign'));
 
         $backUrl = action([static::class, 'index'], [$websiteId]);
-        $segments = Segment::all()->pluck('name', 'id')->toArray();
+        $segments = Segment::pluck('name', 'id')->toArray();
 
         return view(
             'email-marketing::campaign.form',
@@ -53,7 +53,7 @@ class CampaignController extends AdminController
 
         $model = Campaign::with('segments')->findOrFail($id);
         $backUrl = action([static::class, 'index'], [$websiteId]);
-        $segments = Segment::all()->pluck('name', 'id')->toArray();
+        $segments = Segment::pluck('name', 'id')->toArray();
 
         return view(
             'email-marketing::campaign.form',
