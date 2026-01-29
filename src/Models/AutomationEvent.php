@@ -5,11 +5,10 @@ namespace Juzaweb\Modules\EmailMarketing\Models;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Juzaweb\Modules\Core\Models\Model;
 use Juzaweb\Modules\Core\Traits\HasAPI;
-use Juzaweb\Modules\Core\Traits\Networkable;
 
 class AutomationEvent extends Model
 {
-    use HasAPI, Networkable;
+    use HasAPI;
 
     protected $table = 'email_automation_events';
 

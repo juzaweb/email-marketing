@@ -5,12 +5,11 @@ namespace Juzaweb\Modules\EmailMarketing\Models;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Juzaweb\Modules\Core\Models\Model;
 use Juzaweb\Modules\Core\Traits\HasAPI;
-use Juzaweb\Modules\Core\Traits\Networkable;
 use Juzaweb\Modules\EmailMarketing\Enums\AutomationLogStatusEnum;
 
 class AutomationLog extends Model
 {
-    use HasAPI, Networkable;
+    use HasAPI;
 
     protected $table = 'email_automation_logs';
 
