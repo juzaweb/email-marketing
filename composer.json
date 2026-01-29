@@ -3,15 +3,6 @@
     "type": "juzaweb-module",
     "license": "MIT",
     "description": "Email Marketing module for JuzaWeb CMS",
-    "extra": {
-        "juzaweb": {
-            "name": "Email Marketing",
-            "domain": "email_marketing",
-            "providers": [
-                "Juzaweb\\Modules\\EmailMarketing\\Providers\\EmailMarketingServiceProvider"
-            ]
-        }
-    },
     "autoload": {
         "psr-4": {
             "Juzaweb\\Modules\\EmailMarketing\\": "src/"
