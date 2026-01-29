@@ -15,10 +15,6 @@ return new class extends Migration
      */
     public function up()
     {
-        if (Schema::hasTable('email_campaigns')) {
-            return;
-        }
-
         Schema::create('email_campaigns', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('template_id')->nullable()->constrained('email_marketing_templates')->onDelete('set null');
@@ -30,6 +26,14 @@ return new class extends Migration
             $table->bigInteger('clicks')->default(0);
             $table->dateTime('scheduled_at')->nullable();
             $table->dateTime('sent_at')->nullable();
+            $table->enum('send_type', ['manual', 'auto'])->default('manual');
+
+            // Automation fields (only used when send_type = 'auto')
+            $table->string('automation_trigger_type')->nullable();
+            $table->json('automation_conditions')->nullable();
+            $table->integer('automation_delay_hours')->default(0);
+
+            $table->index(['send_type', 'automation_trigger_type']);
             $table->datetimes();
         });
 
