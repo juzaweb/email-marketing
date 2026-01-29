@@ -20,7 +20,7 @@ class RouteServiceProvider extends ServiceProvider
             //     ->prefix('api/v1')
             //     ->group(__DIR__ . '/../routes/api.php');
 
-            $adminPrefix = $this->app['config']->get('app.admin_prefix');
+            $adminPrefix = $this->app['config']->get('core.admin_prefix');
 
             Route::middleware(['admin'])
                 ->prefix($adminPrefix)
