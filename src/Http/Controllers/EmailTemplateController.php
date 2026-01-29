@@ -2,8 +2,8 @@
 
 namespace Juzaweb\Modules\EmailMarketing\Http\Controllers;
 
-use Juzaweb\Modules\Admin\Facades\Breadcrumb;
-use Juzaweb\Modules\Admin\Http\Controllers\AdminController;
+use Juzaweb\Modules\Core\Facades\Breadcrumb;
+use Juzaweb\Modules\Core\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\DB;
 use Juzaweb\Modules\EmailMarketing\Models\EmailTemplate;
 use Juzaweb\Modules\EmailMarketing\Http\Requests\EmailTemplateRequest;

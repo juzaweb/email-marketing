@@ -2,8 +2,8 @@
 
 namespace Juzaweb\Modules\EmailMarketing\Providers;
 
-use Juzaweb\Modules\Admin\Facades\Menu;
-use Juzaweb\Modules\Admin\Providers\ServiceProvider;
+use Juzaweb\Modules\Core\Facades\Menu;
+use Juzaweb\Modules\Core\Providers\ServiceProvider;
 use Illuminate\Support\Facades\File;
 use Juzaweb\Modules\EmailMarketing\Contracts\AutomationTriggerRegistryInterface;
 use Juzaweb\Modules\EmailMarketing\Support\AutomationTriggerRegistry;

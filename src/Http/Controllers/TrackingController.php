@@ -4,7 +4,7 @@ namespace Juzaweb\Modules\EmailMarketing\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Juzaweb\Modules\Admin\Http\Controllers\ThemeController;
+use Juzaweb\Modules\Core\Http\Controllers\ThemeController;
 use Juzaweb\Modules\EmailMarketing\Models\CampaignTracking;
 
 class TrackingController extends ThemeController

@@ -4,9 +4,9 @@ namespace Juzaweb\Modules\EmailMarketing\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Juzaweb\Modules\Admin\Models\Model;
-use Juzaweb\Modules\Admin\Traits\HasAPI;
-use Juzaweb\Modules\Admin\Traits\Networkable;
+use Juzaweb\Modules\Core\Models\Model;
+use Juzaweb\Modules\Core\Traits\HasAPI;
+use Juzaweb\Modules\Core\Traits\Networkable;
 
 class AutomationRule extends Model
 {

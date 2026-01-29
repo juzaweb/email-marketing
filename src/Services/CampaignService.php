@@ -4,7 +4,7 @@ namespace Juzaweb\Modules\EmailMarketing\Services;
 
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Log;
-use Juzaweb\Modules\Admin\Services\BaseService;
+use Juzaweb\Modules\Core\Services\BaseService;
 use Juzaweb\Modules\EmailMarketing\Jobs\SendCampaignJob;
 use Juzaweb\Modules\EmailMarketing\Models\Campaign;
 use Juzaweb\Modules\EmailMarketing\Models\CampaignBatch;

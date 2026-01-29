@@ -3,7 +3,7 @@
 namespace Juzaweb\Modules\EmailMarketing\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Juzaweb\Modules\Admin\Rules\AllExist;
+use Juzaweb\Modules\Core\Rules\AllExist;
 
 class EmailTemplateActionsRequest extends FormRequest
 {
