@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Juzaweb\Modules\Core\Models\Model;
 use Juzaweb\Modules\Core\Traits\HasAPI;
+use Juzaweb\Modules\EmailMarketing\Support\Traits\HasUuid;
 
 class AutomationRule extends Model
 {
-    use HasAPI;
+    use HasAPI, HasUuid;
 
     protected $table = 'email_automation_rules';
 

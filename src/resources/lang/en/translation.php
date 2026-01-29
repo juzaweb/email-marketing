@@ -9,7 +9,10 @@ return [
 
     // Automation
     'automation' => [
+        'title' => 'Automation',
+        'delay_hours' => 'Delay (Hours)',
         'trigger' => [
+            'label' => 'Trigger',
             'user_registered' => 'User Registered',
             'user_registered_desc' => 'Trigger when a user successfully registers',
             'user_birthday' => 'User Birthday',

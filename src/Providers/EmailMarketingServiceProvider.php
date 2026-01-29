@@ -12,11 +12,18 @@ class EmailMarketingServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        //
-
         $this->registerMenus();
 
         $this->registerAutomationTriggers();
+
+        $this->commands([
+            \Juzaweb\Modules\EmailMarketing\Commands\CheckBirthdayAutomationCommand::class,
+        ]);
+
+        \Illuminate\Support\Facades\Event::listen(
+            \Illuminate\Auth\Events\Registered::class,
+            [\Juzaweb\Modules\EmailMarketing\Listeners\AutomationListener::class, 'handle']
+        );
     }
 
     public function register(): void
@@ -76,6 +83,15 @@ class EmailMarketingServiceProvider extends ServiceProvider
                 'parent' => 'email-marketing',
                 'icon' => 'fas fa-layer-group',
                 'permissions' => 'email-marketing.segments.index',
+            ];
+        });
+
+        Menu::make('email-marketing.automation', function () {
+            return [
+                'title' => __('email-marketing::translation.automation.title'),
+                'parent' => 'email-marketing',
+                'icon' => 'fas fa-robot',
+                'permissions' => 'email-marketing.automation.index',
             ];
         });
     }
