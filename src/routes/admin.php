@@ -1,12 +1,11 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Admin Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register Admin routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "admin" middleware group. Now create something great!
-|
-*/
+use Juzaweb\Modules\EmailMarketing\Http\Controllers\SegmentController;
+use Juzaweb\Modules\EmailMarketing\Http\Controllers\EmailTemplateController;
+use Juzaweb\Modules\EmailMarketing\Http\Controllers\SubscriberController;
+use Juzaweb\Modules\EmailMarketing\Http\Controllers\CampaignController;
+
+Route::admin('email-marketing/segments', SegmentController::class);
+Route::admin('email-marketing/email-templates', EmailTemplateController::class);
+Route::admin('email-marketing/subscribers', SubscriberController::class);
+Route::admin('email-marketing/campaigns', CampaignController::class);

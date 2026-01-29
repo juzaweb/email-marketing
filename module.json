@@ -1,0 +1,11 @@
+{
+    "name": "EmailMarketing",
+    "alias": "email-marketing",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Juzaweb\\Modules\\EmailMarketing\\Providers\\EmailMarketingServiceProvider"
+    ],
+    "files": []
+}
