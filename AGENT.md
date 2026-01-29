@@ -5,7 +5,7 @@
 This is a **Juzaweb modular plugin** for email marketing campaigns with Laravel Queue-based bulk sending, automation triggers, and comprehensive tracking. Key architectural patterns:
 
 - **Module Structure**: Uses Juzaweb's modular architecture with `module.json` and specific namespace `Juzaweb\Modules\EmailMarketing`
-- **Multi-tenant**: All models extend `Juzaweb\Modules\Admin\Models\Model` with `Networkable` trait for website isolation
+- **Multi-tenant**: All models extend `Juzaweb\Modules\Core\Models\Model` with `Networkable` trait for website isolation
 - **Batch Processing**: Campaign sending uses Laravel's `Bus::batch()` for progress tracking and cancellation
 - **Registry Pattern**: Automation triggers use singleton registry instead of hardcoded enums
 
