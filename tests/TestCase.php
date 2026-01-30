@@ -194,5 +194,9 @@ abstract class TestCase extends Orchestra
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
         $this->artisan('migrate', ['--database' => $connection])->run();
+
+        \Illuminate\Support\Facades\Schema::table('users', function ($table) {
+            $table->boolean('is_admin')->default(0);
+        });
     }
 }

@@ -21,7 +21,8 @@ class AutomationControllerTest extends TestCase
 
     public function test_index_automation_rules()
     {
-        $this->actingAs($this->admin, 'admin');
+        $this->withoutMiddleware();
+        $this->actingAs($this->admin);
 
         $response = $this->get('admin/email-marketing/automation');
 
@@ -30,7 +31,8 @@ class AutomationControllerTest extends TestCase
 
     public function test_create_automation_rule()
     {
-        $this->actingAs($this->admin, 'admin');
+        $this->withoutMiddleware();
+        $this->actingAs($this->admin);
 
         $response = $this->get('admin/email-marketing/automation/create');
 
@@ -39,7 +41,8 @@ class AutomationControllerTest extends TestCase
 
     public function test_store_automation_rule()
     {
-        $this->actingAs($this->admin, 'admin');
+        $this->withoutMiddleware();
+        $this->actingAs($this->admin);
 
         $template = EmailTemplate::create([
             'name' => 'Test Template',

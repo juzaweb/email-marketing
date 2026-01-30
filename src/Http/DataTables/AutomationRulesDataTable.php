@@ -25,13 +25,18 @@ class AutomationRulesDataTable extends DataTable
             Column::checkbox(),
             Column::id(),
             Column::actions(),
-            Column::editLink('name', admin_url('email-marketing/automation/{id}/edit'), __('admin::translation.name')),
-            Column::make('trigger_type', function ($row) {
-                return $row->trigger_type;
-            }, __('email-marketing::translation.automation.trigger.label')),
-            Column::make('active', function ($row) {
-                return $row->active ? __('admin::translation.active') : __('admin::translation.inactive');
-            }, __('admin::translation.status')),
+            Column::make('name')
+                ->title(__('admin::translation.name'))
+                ->format(function ($value, $row) {
+                    return '<a href="' . admin_url("email-marketing/automation/{$row->id}/edit") . '">' . $value . '</a>';
+                }),
+            Column::make('trigger_type')
+                ->title(__('email-marketing::translation.automation.trigger.label')),
+            Column::make('active')
+                ->title(__('admin::translation.status'))
+                ->format(function ($value, $row) {
+                    return $row->active ? __('admin::translation.active') : __('admin::translation.inactive');
+                }),
             Column::createdAt()
         ];
     }
