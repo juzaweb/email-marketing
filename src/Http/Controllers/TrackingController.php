@@ -5,6 +5,7 @@ namespace Juzaweb\Modules\EmailMarketing\Http\Controllers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Juzaweb\Modules\Core\Http\Controllers\ThemeController;
+use Juzaweb\Modules\EmailMarketing\Jobs\TrackCampaignActivity;
 use Juzaweb\Modules\EmailMarketing\Models\CampaignTracking;
 
 class TrackingController extends ThemeController
@@ -12,7 +13,7 @@ class TrackingController extends ThemeController
     public function trackOpen($campaignId, $subscriberId)
     {
         // 1. Ghi nhận vào DB (chỉ ghi nhận nếu chưa tồn tại hoặc ghi nhận mọi lần tùy nhu cầu)
-        CampaignTracking::create([
+        TrackCampaignActivity::dispatch([
             'campaign_id' => $campaignId,
             'subscriber_id' => $subscriberId,
             'type' => 'opened',
@@ -32,7 +33,7 @@ class TrackingController extends ThemeController
         $subscriberId = $request->query('sid');
 
         // 1. Ghi nhận lượt click
-        CampaignTracking::create([
+        TrackCampaignActivity::dispatch([
             'campaign_id' => $campaignId,
             'subscriber_id' => $subscriberId,
             'type' => 'clicked',
