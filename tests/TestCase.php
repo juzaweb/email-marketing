@@ -176,6 +176,7 @@ abstract class TestCase extends Orchestra
         $app['config']->set('app.locale', 'en');
         $app['config']->set('translatable.fallback_locale', 'en');
         $app['config']->set('auth.providers.users.model', \Juzaweb\Modules\Core\Models\User::class);
+        $app['config']->set('app.key', 'base64:UPUjhS0wY+aU03/24e/WbF36qJ7j7h0Yc0+1k/2j6qM=');
     }
 
     /**
@@ -187,10 +188,9 @@ abstract class TestCase extends Orchestra
     {
         $connection = config('database.default');
 
-        $this->loadLaravelMigrations(['--database' => $connection]);
-
         // Load package migrations
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../vendor/juzaweb/core/database/migrations');
 
         $this->artisan('migrate', ['--database' => $connection])->run();
     }

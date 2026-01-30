@@ -9,7 +9,7 @@ class CampaignTracking extends Model
 {
     use HasAPI;
 
-    public const UPDATED_AT = false;
+    public const UPDATED_AT = null;
 
     protected $table = 'email_campaign_trackings';
 

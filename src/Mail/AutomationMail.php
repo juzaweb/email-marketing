@@ -40,8 +40,9 @@ class AutomationMail extends Mailable
         );
     }
 
-    protected function replaceVariables(string $content): string
+    protected function replaceVariables(?string $content): string
     {
+        $content = $content ?? '';
         // Simple variable replacement
         if (isset($this->user->name)) {
             $content = str_replace('{{name}}', $this->user->name, $content);

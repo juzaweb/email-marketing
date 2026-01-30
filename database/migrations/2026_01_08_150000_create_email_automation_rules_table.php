@@ -21,6 +21,7 @@ return new class extends Migration
 
         Schema::create('email_automation_rules', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->foreignUuid('template_id')->nullable()->constrained('email_marketing_templates')->onDelete('set null');
             $table->string('name');
             $table->string('description')->nullable();
             $table->string('trigger_type'); // Dynamic trigger type from registry
