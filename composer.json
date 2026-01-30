@@ -19,6 +19,6 @@
     "require-dev": {
          "juzaweb/core": "dev-master",
         "orchestra/testbench": "^9.16",
-        "phpunit/phpunit": "^12.5"
+        "phpunit/phpunit": "^11.0 || ^12.0"
     }
 }
