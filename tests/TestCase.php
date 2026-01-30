@@ -188,15 +188,10 @@ abstract class TestCase extends Orchestra
     {
         $connection = config('database.default');
 
-        $this->loadLaravelMigrations(['--database' => $connection]);
-
         // Load package migrations
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../vendor/juzaweb/core/database/migrations');
 
         $this->artisan('migrate', ['--database' => $connection])->run();
-
-        \Illuminate\Support\Facades\Schema::table('users', function ($table) {
-            $table->boolean('is_admin')->default(0);
-        });
     }
 }

@@ -15,7 +15,7 @@ class AutomationControllerTest extends TestCase
         parent::setUp();
 
         $this->admin = User::factory()->create([
-            'is_admin' => 1
+            'is_super_admin' => 1
         ]);
     }
 
