@@ -2,7 +2,17 @@
 
 namespace Juzaweb\Modules\EmailMarketing\Mail;
 
+use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Mail\Mailables\Headers;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\URL;
+use Juzaweb\Modules\EmailMarketing\Models\Campaign;
+use Juzaweb\Modules\EmailMarketing\Models\Subscriber;
+use Juzaweb\Modules\EmailMarketing\Services\MailContentProcessor;
 
 class DynamicCampaignMail extends Mailable
 {
@@ -22,7 +32,7 @@ class DynamicCampaignMail extends Mailable
         $subject = str_replace('{{first_name}}', $this->subscriber->first_name, $this->campaign->subject);
 
         return new Envelope(
-            from: new Address($this->campaign->emailServer->from_address, $this->campaign->emailServer->from_name),
+            from: new Address(config('mail.from.address'), config('mail.from.name')),
             subject: $subject,
         );
     }

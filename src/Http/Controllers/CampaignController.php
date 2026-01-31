@@ -5,11 +5,13 @@ namespace Juzaweb\Modules\EmailMarketing\Http\Controllers;
 use Juzaweb\Modules\Core\Facades\Breadcrumb;
 use Juzaweb\Modules\Core\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\DB;
+use Juzaweb\Modules\EmailMarketing\Enums\CampaignStatusEnum;
 use Juzaweb\Modules\EmailMarketing\Models\Campaign;
 use Juzaweb\Modules\EmailMarketing\Models\Segment;
 use Juzaweb\Modules\EmailMarketing\Http\Requests\CampaignRequest;
 use Juzaweb\Modules\EmailMarketing\Http\Requests\CampaignActionsRequest;
 use Juzaweb\Modules\EmailMarketing\Http\DataTables\CampaignsDataTable;
+use Juzaweb\Modules\EmailMarketing\Services\CampaignService;
 
 class CampaignController extends AdminController
 {
@@ -69,10 +71,11 @@ class CampaignController extends AdminController
     public function store(CampaignRequest $request, string $websiteId)
     {
         $model = DB::transaction(
-            function () use ($request) {
+            function () use ($request, $websiteId) {
                 $data = $request->validated();
                 $segmentIds = $data['segment_ids'] ?? [];
                 unset($data['segment_ids']);
+                $data['website_id'] = $websiteId;
 
                 $model = Campaign::create($data);
                 $model->segments()->sync($segmentIds);
@@ -92,10 +95,11 @@ class CampaignController extends AdminController
         $model = Campaign::findOrFail($id);
 
         $model = DB::transaction(
-            function () use ($request, $model) {
+            function () use ($request, $model, $websiteId) {
                 $data = $request->validated();
                 $segmentIds = $data['segment_ids'] ?? [];
                 unset($data['segment_ids']);
+                $data['website_id'] = $websiteId;
 
                 $model->update($data);
                 $model->segments()->sync($segmentIds);
@@ -107,6 +111,38 @@ class CampaignController extends AdminController
         return $this->success([
             'redirect' => action([static::class, 'index'], [$websiteId]),
             'message' => __('Campaign :name updated successfully', ['name' => $model->name]),
+        ]);
+    }
+
+    public function send(CampaignService $service, string $id)
+    {
+        $campaign = Campaign::findOrFail($id);
+
+        if ($campaign->status !== CampaignStatusEnum::DRAFT) {
+            return $this->error([
+                'message' => __('Campaign is not in draft status.'),
+            ]);
+        }
+
+        $result = $service->execute($campaign);
+
+        if (is_array($result)) {
+            if (!$result['status']) {
+                return $this->error([
+                    'message' => $result['message'],
+                ]);
+            }
+        } else {
+            if (!$result->status) {
+                return $this->error([
+                    'message' => $result->message,
+                ]);
+            }
+        }
+
+        return $this->success([
+            'message' => __('Campaign sending started successfully.'),
+            'redirect' => action([static::class, 'index'], [$campaign->website_id]),
         ]);
     }
 

@@ -8,6 +8,7 @@ use Juzaweb\Modules\Core\DataTables\BulkAction;
 use Juzaweb\Modules\Core\DataTables\Column;
 use Juzaweb\Modules\Core\DataTables\DataTable;
 use Illuminate\Database\Eloquent\Builder;
+use Juzaweb\Modules\EmailMarketing\Enums\CampaignStatusEnum;
 use Juzaweb\Modules\EmailMarketing\Models\Campaign;
 
 class CampaignsDataTable extends DataTable
@@ -36,10 +37,16 @@ class CampaignsDataTable extends DataTable
 
     public function actions(Model $model): array
     {
-        return [
+        $actions = [
             Action::edit(admin_url("email-marketing/campaigns/{$model->id}/edit"))->can('campaigns.edit'),
             Action::delete()->can('campaigns.delete'),
         ];
+
+        if ($model->status === CampaignStatusEnum::DRAFT) {
+            array_unshift($actions, Action::make(__('Send'), route('email-marketing.campaigns.send', [$model->id]), 'fas fa-paper-plane'));
+        }
+
+        return $actions;
     }
 
     public function bulkActions(): array

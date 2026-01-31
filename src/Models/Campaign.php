@@ -2,6 +2,7 @@
 
 namespace Juzaweb\Modules\EmailMarketing\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Juzaweb\Modules\Core\Models\Model;
 use Juzaweb\Modules\Core\Traits\HasAPI;
 use Juzaweb\Modules\EmailMarketing\Enums\CampaignStatusEnum;
@@ -9,7 +10,7 @@ use Juzaweb\Modules\EmailMarketing\Enums\CampaignSendTypeEnum;
 
 class Campaign extends Model
 {
-    use HasAPI;
+    use HasAPI, HasUuids;
 
     protected $table = 'email_campaigns';
 
@@ -27,6 +28,7 @@ class Campaign extends Model
         'sent_at',
         'views',
         'clicks',
+        'website_id',
     ];
 
     protected $casts = [

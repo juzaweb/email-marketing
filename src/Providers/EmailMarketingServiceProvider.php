@@ -18,6 +18,7 @@ class EmailMarketingServiceProvider extends ServiceProvider
 
         $this->commands([
             \Juzaweb\Modules\EmailMarketing\Commands\CheckBirthdayAutomationCommand::class,
+            \Juzaweb\Modules\EmailMarketing\Commands\ProcessAutomationCommand::class,
         ]);
 
         \Illuminate\Support\Facades\Event::listen(
