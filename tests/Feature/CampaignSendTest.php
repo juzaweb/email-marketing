@@ -38,25 +38,6 @@ class CampaignSendTest extends TestCase
         $user = User::factory()->create(['is_admin' => 1]);
         $this->actingAs($user);
 
-        // Create website
-        $websiteId = Str::uuid()->toString();
-        // Assuming 'websites' table exists from Core migrations
-        if (Schema::hasTable('websites')) {
-            DB::table('websites')->insert([
-                'id' => $websiteId,
-                'name' => 'Test Website',
-                'domain' => 'test.com',
-                'code' => 'test',
-                'status' => 'active',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
-        } else {
-             // Fallback if core migration not loaded properly (should not happen if configured right)
-             // But since we constrained the migration, if table didn't exist, migration would fail.
-             // So if we are here, table exists.
-        }
-
         // Create Segment
         $segment = Segment::create(['name' => 'Test Segment']);
 
@@ -82,7 +63,6 @@ class CampaignSendTest extends TestCase
             'subject' => 'Hello',
             'content' => 'Content',
             'status' => CampaignStatusEnum::DRAFT,
-            'website_id' => $websiteId,
         ]);
 
         // Attach segment to campaign

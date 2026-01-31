@@ -31,7 +31,6 @@ return new class extends Migration
             $table->integer('progress')->default(0)->comment('Percentage 0-100');
             $table->timestamp('started_at')->nullable();
             $table->timestamp('finished_at')->nullable();
-            $table->foreignUuid('website_id')->constrained('websites')->onDelete('cascade');
             $table->datetimes();
 
             $table->index('campaign_id');

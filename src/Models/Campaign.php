@@ -28,7 +28,6 @@ class Campaign extends Model
         'sent_at',
         'views',
         'clicks',
-        'website_id',
     ];
 
     protected $casts = [

@@ -28,12 +28,10 @@ return new class extends Migration
             $table->text('error_message')->nullable();
             $table->dateTime('scheduled_at')->nullable(); // When to send
             $table->dateTime('sent_at')->nullable(); // When actually sent
-            $table->foreignUuid('website_id')->nullable()->constrained('websites')->onDelete('cascade');
             $table->datetimes();
 
             $table->index(['automation_rule_id', 'user_id', 'user_type']);
             $table->index(['status', 'scheduled_at']);
-            $table->index('website_id');
         });
     }
 

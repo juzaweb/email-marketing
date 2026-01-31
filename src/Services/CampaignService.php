@@ -105,7 +105,6 @@ class CampaignService extends BaseService
                     'failed_jobs' => 0,
                     'progress' => 0,
                     'started_at' => now(),
-                    'website_id' => $campaign->website_id,
                 ]);
             });
         });
