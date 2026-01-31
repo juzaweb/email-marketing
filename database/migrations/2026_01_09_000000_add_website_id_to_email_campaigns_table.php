@@ -28,6 +28,7 @@ return new class extends Migration
     {
         Schema::table('email_campaigns', function (Blueprint $table) {
             $table->dropForeign(['website_id']);
+            $table->dropIndex(['website_id']);
             $table->dropColumn('website_id');
         });
     }
