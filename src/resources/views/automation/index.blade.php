@@ -1,11 +1,11 @@
-@extends('admin::layouts.admin')
+@extends('core::layouts.admin')
 
 @section('content')
     <div class="row">
         <div class="col-md-12">
             <div class="btn-group float-right">
                 <a href="{{ $createUrl }}" class="btn btn-success">
-                    <i class="fa fa-plus-circle"></i> {{ __('admin::translation.create') }}
+                    <i class="fa fa-plus-circle"></i> {{ __('core::translation.create') }}
                 </a>
             </div>
         </div>
