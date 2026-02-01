@@ -12,11 +12,11 @@ use Juzaweb\Modules\EmailMarketing\Http\DataTables\SegmentsDataTable;
 
 class SegmentController extends AdminController
 {
-    public function index(SegmentsDataTable $dataTable, string $websiteId)
+    public function index(SegmentsDataTable $dataTable)
     {
         Breadcrumb::add(__('Segments'));
 
-        $createUrl = action([static::class, 'create'], [$websiteId]);
+        $createUrl = action([static::class, 'create']);
 
         return $dataTable->render(
             'email-marketing::segment.index',
@@ -24,44 +24,44 @@ class SegmentController extends AdminController
         );
     }
 
-    public function create(string $websiteId)
+    public function create()
     {
         Breadcrumb::add(__('Segments'), admin_url('segments'));
 
         Breadcrumb::add(__('Create Segment'));
 
-        $backUrl = action([static::class, 'index'], [$websiteId]);
+        $backUrl = action([static::class, 'index']);
 
         return view(
             'email-marketing::segment.form',
             [
                 'model' => new Segment(),
-                'action' => action([static::class, 'store'], [$websiteId]),
+                'action' => action([static::class, 'store']),
                 'backUrl' => $backUrl,
             ]
         );
     }
 
-    public function edit(string $websiteId, string $id)
+    public function edit(string $id)
     {
         Breadcrumb::add(__('Segments'), admin_url('segments'));
 
         Breadcrumb::add(__('Create Segments'));
 
         $model = Segment::findOrFail($id);
-        $backUrl = action([static::class, 'index'], [$websiteId]);
+        $backUrl = action([static::class, 'index']);
 
         return view(
             'email-marketing::segment.form',
             [
-                'action' => action([static::class, 'update'], [$websiteId, $id]),
+                'action' => action([static::class, 'update'], [$id]),
                 'model' => $model,
                 'backUrl' => $backUrl,
             ]
         );
     }
 
-    public function store(SegmentRequest $request, string $websiteId)
+    public function store(SegmentRequest $request)
     {
         $model = DB::transaction(
             function () use ($request) {
@@ -72,12 +72,12 @@ class SegmentController extends AdminController
         );
 
         return $this->success([
-            'redirect' => action([static::class, 'index'], [$websiteId]),
+            'redirect' => action([static::class, 'index']),
             'message' => __('Segment :name created successfully', ['name' => $model->name]),
         ]);
     }
 
-    public function update(SegmentRequest $request, string $websiteId, string $id)
+    public function update(SegmentRequest $request, string $id)
     {
         $model = Segment::findOrFail($id);
 
@@ -92,12 +92,12 @@ class SegmentController extends AdminController
         );
 
         return $this->success([
-            'redirect' => action([static::class, 'index'], [$websiteId]),
+            'redirect' => action([static::class, 'index']),
             'message' => __('Segment :name updated successfully', ['name' => $model->name]),
         ]);
     }
 
-    public function bulk(SegmentActionsRequest $request, string $websiteId)
+    public function bulk(SegmentActionsRequest $request)
     {
         $action = $request->input('action');
         $ids = $request->input('ids', []);
