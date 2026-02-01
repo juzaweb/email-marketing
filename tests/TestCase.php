@@ -49,7 +49,6 @@ abstract class TestCase extends Orchestra
         }
 
         $this->app[\Juzaweb\Modules\Core\Contracts\ThemeSetting::class]->set('setup', 1);
-        \Illuminate\Support\Facades\View::addNamespace('admin', __DIR__ . '/../vendor/juzaweb/core/src/resources/views');
     }
 
     protected function createMixManifest(): void
