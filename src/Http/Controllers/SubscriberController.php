@@ -12,11 +12,11 @@ use Juzaweb\Modules\EmailMarketing\Http\DataTables\SubscribersDataTable;
 
 class SubscriberController extends AdminController
 {
-    public function index(SubscribersDataTable $dataTable, string $websiteId)
+    public function index(SubscribersDataTable $dataTable)
     {
         Breadcrumb::add(__('Subscribers'));
 
-        $createUrl = action([static::class, 'create'], [$websiteId]);
+        $createUrl = action([static::class, 'create']);
 
         return $dataTable->render(
             'email-marketing::subscriber.index',
@@ -24,44 +24,44 @@ class SubscriberController extends AdminController
         );
     }
 
-    public function create(string $websiteId)
+    public function create()
     {
         Breadcrumb::add(__('Subscribers'), admin_url('subscribers'));
 
         Breadcrumb::add(__('Create Subscriber'));
 
-        $backUrl = action([static::class, 'index'], [$websiteId]);
+        $backUrl = action([static::class, 'index']);
 
         return view(
             'email-marketing::subscriber.form',
             [
                 'model' => new Subscriber(),
-                'action' => action([static::class, 'store'], [$websiteId]),
+                'action' => action([static::class, 'store']),
                 'backUrl' => $backUrl,
             ]
         );
     }
 
-    public function edit(string $websiteId, string $id)
+    public function edit(string $id)
     {
         Breadcrumb::add(__('Subscribers'), admin_url('subscribers'));
 
         Breadcrumb::add(__('Create Subscribers'));
 
         $model = Subscriber::findOrFail($id);
-        $backUrl = action([static::class, 'index'], [$websiteId]);
+        $backUrl = action([static::class, 'index']);
 
         return view(
             'email-marketing::subscriber.form',
             [
-                'action' => action([static::class, 'update'], [$websiteId, $id]),
+                'action' => action([static::class, 'update'], [$id]),
                 'model' => $model,
                 'backUrl' => $backUrl,
             ]
         );
     }
 
-    public function store(SubscriberRequest $request, string $websiteId)
+    public function store(SubscriberRequest $request)
     {
         $model = DB::transaction(
             function () use ($request) {
@@ -72,12 +72,12 @@ class SubscriberController extends AdminController
         );
 
         return $this->success([
-            'redirect' => action([static::class, 'index'], [$websiteId]),
+            'redirect' => action([static::class, 'index']),
             'message' => __('Subscriber :name created successfully', ['name' => $model->name]),
         ]);
     }
 
-    public function update(SubscriberRequest $request, string $websiteId, string $id)
+    public function update(SubscriberRequest $request, string $id)
     {
         $model = Subscriber::findOrFail($id);
 
@@ -92,12 +92,12 @@ class SubscriberController extends AdminController
         );
 
         return $this->success([
-            'redirect' => action([static::class, 'index'], [$websiteId]),
+            'redirect' => action([static::class, 'index']),
             'message' => __('Subscriber :name updated successfully', ['name' => $model->name]),
         ]);
     }
 
-    public function bulk(SubscriberActionsRequest $request, string $websiteId)
+    public function bulk(SubscriberActionsRequest $request)
     {
         $action = $request->input('action');
         $ids = $request->input('ids', []);

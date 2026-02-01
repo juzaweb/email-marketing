@@ -23,7 +23,6 @@ class CampaignBatch extends Model
         'progress',
         'started_at',
         'finished_at',
-        'website_id',
     ];
 
     protected $casts = [

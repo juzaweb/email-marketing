@@ -12,11 +12,11 @@ use Juzaweb\Modules\EmailMarketing\Http\DataTables\EmailTemplatesDataTable;
 
 class EmailTemplateController extends AdminController
 {
-    public function index(EmailTemplatesDataTable $dataTable, string $websiteId)
+    public function index(EmailTemplatesDataTable $dataTable)
     {
         Breadcrumb::add(__('Email Templates'));
 
-        $createUrl = action([static::class, 'create'], [$websiteId]);
+        $createUrl = action([static::class, 'create']);
 
         return $dataTable->render(
             'email-marketing::email-template.index',
@@ -24,44 +24,44 @@ class EmailTemplateController extends AdminController
         );
     }
 
-    public function create(string $websiteId)
+    public function create()
     {
         Breadcrumb::add(__('Email Templates'), admin_url('emailtemplates'));
 
         Breadcrumb::add(__('Create Email Template'));
 
-        $backUrl = action([static::class, 'index'], [$websiteId]);
+        $backUrl = action([static::class, 'index']);
 
         return view(
             'email-marketing::email-template.form',
             [
                 'model' => new EmailTemplate(),
-                'action' => action([static::class, 'store'], [$websiteId]),
+                'action' => action([static::class, 'store']),
                 'backUrl' => $backUrl,
             ]
         );
     }
 
-    public function edit(string $websiteId, string $id)
+    public function edit(string $id)
     {
         Breadcrumb::add(__('Email Templates'), admin_url('emailtemplates'));
 
         Breadcrumb::add(__('Create Email Templates'));
 
         $model = EmailTemplate::findOrFail($id);
-        $backUrl = action([static::class, 'index'], [$websiteId]);
+        $backUrl = action([static::class, 'index']);
 
         return view(
             'email-marketing::email-template.form',
             [
-                'action' => action([static::class, 'update'], [$websiteId, $id]),
+                'action' => action([static::class, 'update'], [$id]),
                 'model' => $model,
                 'backUrl' => $backUrl,
             ]
         );
     }
 
-    public function store(EmailTemplateRequest $request, string $websiteId)
+    public function store(EmailTemplateRequest $request)
     {
         $model = DB::transaction(
             function () use ($request) {
@@ -72,12 +72,12 @@ class EmailTemplateController extends AdminController
         );
 
         return $this->success([
-            'redirect' => action([static::class, 'index'], [$websiteId]),
+            'redirect' => action([static::class, 'index']),
             'message' => __('EmailTemplate :name created successfully', ['name' => $model->name]),
         ]);
     }
 
-    public function update(EmailTemplateRequest $request, string $websiteId, string $id)
+    public function update(EmailTemplateRequest $request, string $id)
     {
         $model = EmailTemplate::findOrFail($id);
 
@@ -92,12 +92,12 @@ class EmailTemplateController extends AdminController
         );
 
         return $this->success([
-            'redirect' => action([static::class, 'index'], [$websiteId]),
+            'redirect' => action([static::class, 'index']),
             'message' => __('EmailTemplate :name updated successfully', ['name' => $model->name]),
         ]);
     }
 
-    public function bulk(EmailTemplateActionsRequest $request, string $websiteId)
+    public function bulk(EmailTemplateActionsRequest $request)
     {
         $action = $request->input('action');
         $ids = $request->input('ids', []);

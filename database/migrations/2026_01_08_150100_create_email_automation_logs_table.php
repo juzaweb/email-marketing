@@ -32,7 +32,6 @@ return new class extends Migration
 
             $table->index(['automation_rule_id', 'user_id', 'user_type']);
             $table->index(['status', 'scheduled_at']);
-            $table->index('website_id');
         });
     }
 

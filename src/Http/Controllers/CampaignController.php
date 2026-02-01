@@ -13,11 +13,11 @@ use Juzaweb\Modules\EmailMarketing\Http\DataTables\CampaignsDataTable;
 
 class CampaignController extends AdminController
 {
-    public function index(CampaignsDataTable $dataTable, string $websiteId)
+    public function index(CampaignsDataTable $dataTable)
     {
         Breadcrumb::add(__('Campaigns'));
 
-        $createUrl = action([static::class, 'create'], [$websiteId]);
+        $createUrl = action([static::class, 'create']);
 
         return $dataTable->render(
             'email-marketing::campaign.index',
@@ -25,40 +25,40 @@ class CampaignController extends AdminController
         );
     }
 
-    public function create(string $websiteId)
+    public function create()
     {
         Breadcrumb::add(__('Campaigns'), admin_url('campaigns'));
 
         Breadcrumb::add(__('Create Campaign'));
 
-        $backUrl = action([static::class, 'index'], [$websiteId]);
+        $backUrl = action([static::class, 'index']);
         $segments = Segment::pluck('name', 'id')->toArray();
 
         return view(
             'email-marketing::campaign.form',
             [
                 'model' => new Campaign(),
-                'action' => action([static::class, 'store'], [$websiteId]),
+                'action' => action([static::class, 'store']),
                 'backUrl' => $backUrl,
                 'segments' => $segments,
             ]
         );
     }
 
-    public function edit(string $websiteId, string $id)
+    public function edit(string $id)
     {
         Breadcrumb::add(__('Campaigns'), admin_url('campaigns'));
 
         Breadcrumb::add(__('Create Campaigns'));
 
         $model = Campaign::with('segments')->findOrFail($id);
-        $backUrl = action([static::class, 'index'], [$websiteId]);
+        $backUrl = action([static::class, 'index']);
         $segments = Segment::pluck('name', 'id')->toArray();
 
         return view(
             'email-marketing::campaign.form',
             [
-                'action' => action([static::class, 'update'], [$websiteId, $id]),
+                'action' => action([static::class, 'update'], [$id]),
                 'model' => $model,
                 'backUrl' => $backUrl,
                 'segments' => $segments,
@@ -66,7 +66,7 @@ class CampaignController extends AdminController
         );
     }
 
-    public function store(CampaignRequest $request, string $websiteId)
+    public function store(CampaignRequest $request)
     {
         $model = DB::transaction(
             function () use ($request) {
@@ -82,12 +82,12 @@ class CampaignController extends AdminController
         );
 
         return $this->success([
-            'redirect' => action([static::class, 'index'], [$websiteId]),
+            'redirect' => action([static::class, 'index']),
             'message' => __('Campaign :name created successfully', ['name' => $model->name]),
         ]);
     }
 
-    public function update(CampaignRequest $request, string $websiteId, string $id)
+    public function update(CampaignRequest $request, string $id)
     {
         $model = Campaign::findOrFail($id);
 
@@ -105,12 +105,12 @@ class CampaignController extends AdminController
         );
 
         return $this->success([
-            'redirect' => action([static::class, 'index'], [$websiteId]),
+            'redirect' => action([static::class, 'index']),
             'message' => __('Campaign :name updated successfully', ['name' => $model->name]),
         ]);
     }
 
-    public function bulk(CampaignActionsRequest $request, string $websiteId)
+    public function bulk(CampaignActionsRequest $request)
     {
         $action = $request->input('action');
         $ids = $request->input('ids', []);
