@@ -10,7 +10,7 @@ class AutomationRuleRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:250'],
-            'template_id' => ['required', 'exists:email_templates,id'],
+            'template_id' => ['required', 'exists:email_marketing_templates,id'],
             'trigger_type' => ['required', 'string', 'max:100'],
             'delay_hours' => ['nullable', 'integer', 'min:0'],
             'active' => ['boolean'],
