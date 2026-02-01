@@ -30,7 +30,7 @@ class AutomationController extends AdminController
     {
         Breadcrumb::add(__('email-marketing::translation.email_marketing'), admin_url('email-marketing'));
         Breadcrumb::add(__('email-marketing::translation.automation.title'), action([static::class, 'index']));
-        Breadcrumb::add(__('admin::translation.create'));
+        Breadcrumb::add(__('core::translation.create'));
 
         $triggers = $triggerRegistry->all();
         $templates = EmailTemplate::pluck('name', 'id')->toArray();
@@ -53,7 +53,7 @@ class AutomationController extends AdminController
 
         return $this->success([
             'redirect' => action([static::class, 'index']),
-            'message' => __('admin::translation.created_successfully'),
+            'message' => __('core::translation.created_successfully'),
         ]);
     }
 
@@ -63,7 +63,7 @@ class AutomationController extends AdminController
 
         Breadcrumb::add(__('email-marketing::translation.email_marketing'), admin_url('email-marketing'));
         Breadcrumb::add(__('email-marketing::translation.automation.title'), action([static::class, 'index']));
-        Breadcrumb::add(__('admin::translation.edit'));
+        Breadcrumb::add(__('core::translation.edit'));
 
         $triggers = $triggerRegistry->all();
         $templates = EmailTemplate::pluck('name', 'id')->toArray();
@@ -87,7 +87,7 @@ class AutomationController extends AdminController
 
         return $this->success([
             'redirect' => action([static::class, 'index']),
-            'message' => __('admin::translation.updated_successfully'),
+            'message' => __('core::translation.updated_successfully'),
         ]);
     }
 
@@ -105,7 +105,7 @@ class AutomationController extends AdminController
         }
 
         return $this->success([
-            'message' => __('admin::translation.successfully'),
+            'message' => __('core::translation.successfully'),
         ]);
     }
 }

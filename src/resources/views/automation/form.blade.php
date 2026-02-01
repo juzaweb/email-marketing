@@ -1,14 +1,14 @@
-@extends('admin::layouts.admin')
+@extends('core::layouts.admin')
 
 @section('content')
     <div class="row">
         <div class="col-md-12">
             <div class="btn-group float-right">
                 <a href="{{ $backUrl }}" class="btn btn-warning">
-                    <i class="fa fa-arrow-left"></i> {{ __('admin::translation.back') }}
+                    <i class="fa fa-arrow-left"></i> {{ __('core::translation.back') }}
                 </a>
                 <button type="submit" form="form-save" class="btn btn-success">
-                    <i class="fa fa-save"></i> {{ __('admin::translation.save') }}
+                    <i class="fa fa-save"></i> {{ __('core::translation.save') }}
                 </button>
             </div>
         </div>
@@ -24,11 +24,11 @@
                 <x-card>
                     {{ Field::text($model, 'name', [
                         'required' => true,
-                        'label' => __('admin::translation.name')
+                        'label' => __('core::translation.name')
                     ]) }}
 
                     {{ Field::textarea($model, 'description', [
-                        'label' => __('admin::translation.description')
+                        'label' => __('core::translation.description')
                     ]) }}
 
                     {{ Field::select($model, 'template_id', [
@@ -60,7 +60,7 @@
         <div class="col-md-4">
              <x-card>
                 {{ Field::checkbox($model, 'active', [
-                    'label' => __('admin::translation.active'),
+                    'label' => __('core::translation.active'),
                     'checked' => $model->active
                 ]) }}
             </x-card>

@@ -26,16 +26,16 @@ class AutomationRulesDataTable extends DataTable
             Column::id(),
             Column::actions(),
             Column::make('name')
-                ->title(__('admin::translation.name'))
+                ->title(__('core::translation.name'))
                 ->format(function ($value, $row) {
                     return '<a href="' . admin_url("email-marketing/automation/{$row->id}/edit") . '">' . $value . '</a>';
                 }),
             Column::make('trigger_type')
                 ->title(__('email-marketing::translation.automation.trigger.label')),
             Column::make('active')
-                ->title(__('admin::translation.status'))
+                ->title(__('core::translation.status'))
                 ->format(function ($value, $row) {
-                    return $row->active ? __('admin::translation.active') : __('admin::translation.inactive');
+                    return $row->active ? __('core::translation.active') : __('core::translation.inactive');
                 }),
             Column::createdAt()
         ];
